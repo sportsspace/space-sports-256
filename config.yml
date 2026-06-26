@@ -1,0 +1,24 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "articles"
+    label: "Articles"
+    folder: "articles"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["Football", "Basketball", "Baseball", "Hockey", "Athletics", "Golf"] }
+      - { label: "Author", name: "author", widget: "string", default: "Your Name" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+- { label: "Tags", name: "tags", widget: "list", default: ["sports"] }
+- { label: "Gallery", name: "gallery", widget: "list", field: { label: "Image", name: "url", widget: "image" } }

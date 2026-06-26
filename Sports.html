@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sports Space · Sports News</title>
+  <!-- Font Awesome for icons (professional & clean) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      background: #f6f9fc;
+      color: #1a2639;
+      line-height: 1.5;
+    }
+
+    /* container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header / navbar */
+    .navbar {
+      background: #0b1a2e;
+      color: white;
+      padding: 18px 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .logo i {
+      color: #facc15;
+      font-size: 2rem;
+    }
+
+    .logo span {
+      background: linear-gradient(145deg, #facc15, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-weight: 500;
+      font-size: 1.05rem;
+    }
+
+    .nav-links a {
+      color: #e8edf5;
+      text-decoration: none;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+
+    .nav-links a:hover {
+      color: #facc15;
+      border-bottom-color: #facc15;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #facc15;
+      background: none;
+      border: none;
+    }
+
+    /* hero / breaking */
+    .hero {
+      background: linear-gradient(135deg, #0b1a2e 0%, #1e3349 100%);
+      color: white;
+      padding: 2.8rem 0 2.2rem;
+      margin: 24px 0 32px;
+      border-radius: 28px;
+      box-shadow: 0 12px 30px rgba(0, 20, 40, 0.2);
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero-tag {
+      background: #facc15;
+      color: #0b1a2e;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 4px 16px;
+      border-radius: 40px;
+      display: inline-block;
+      width: fit-content;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1.2;
+      max-width: 800px;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      opacity: 0.85;
+      max-width: 700px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: #b0c7dd;
+    }
+
+    .hero-meta i {
+      color: #facc15;
+      margin-right: 6px;
+    }
+
+    /* section titles */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 40px 0 24px;
+      border-bottom: 3px solid #e2eaf2;
+      padding-bottom: 12px;
+    }
+
+    .section-title i {
+      color: #facc15;
+      font-size: 2rem;
+    }
+
+    /* news grid */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .news-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+      transition: transform 0.25s ease, box-shadow 0.3s;
+      border: 1px solid #edf2f7;
+    }
+
+    .news-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 32px rgba(0, 20, 40, 0.08);
+    }
+
+    .card-img {
+      height: 180px;
+      background: linear-gradient(145deg, #1e3349, #2b4a66);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+      position: relative;
+    }
+
+    .card-img i {
+      opacity: 0.5;
+    }
+
+    .card-img .cat-tag {
+      position: absolute;
+      bottom: 12px;
+      left: 16px;
+      background: #facc15;
+      color: #0b1a2e;
+      font-weight: 700;
+      font-size: 0.7rem;
+      padding: 4px 14px;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+    }
+
+    .card-body {
+      padding: 20px 22px 24px;
+    }
+
+    .card-body h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .card-body p {
+      color: #3c4b5f;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #5a6e85;
+      border-top: 1px solid #eef4f8;
+      padding-top: 14px;
+    }
+
+    .card-footer i {
+      margin-right: 4px;
+      color: #facc15;
+    }
+
+    .card-footer .author {
+      font-weight: 600;
+      color: #1a2639;
+    }
+
+    /* featured / 2-column layout */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 28px;
+      margin: 20px 0 30px;
+    }
+
+    .featured-main {
+      background: white;
+      border-radius: 28px;
+      padding: 28px 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.02);
+      border: 1px solid #edf2f7;
+    }
+
+    .featured-main h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .featured-main h2 i {
+      color: #facc15;
+    }
+
+    .featured-main .big-news {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .big-news-item {
+      border-bottom: 1px solid #eef4f8;
+      padding-bottom: 20px;
+    }
+
+    .big-news-item:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .big-news-item h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .big-news-item .meta {
+      color: #5a6e85;
+      font-size: 0.85rem;
+      margin-top: 6px;
+    }
+
+    .meta i {
+      color: #facc15;
+      margin-right: 4px;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .sidebar-card {
+      background: white;
+      border-radius: 28px;
+      padding: 24px 26px;
+      border: 1px solid #edf2f7;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.02);
+    }
+
+    .sidebar-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 2px solid #f0f5fa;
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+
+    .sidebar-card h3 i {
+      color: #facc15;
+    }
+
+    .sidebar-list {
+      list-style: none;
+    }
+
+    .sidebar-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f5fa;
+      font-weight: 500;
+    }
+
+    .sidebar-list li:last-child {
+      border-bottom: 0;
+    }
+
+    .sidebar-list .num {
+      background: #0b1a2e;
+      color: white;
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    /* footer */
+    .footer {
+      background: #0b1a2e;
+      color: #b8ccdd;
+      margin-top: 60px;
+      padding: 40px 0 28px;
+      border-radius: 40px 40px 0 0;
+    }
+
+    .footer .container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .footer-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .footer-logo i {
+      color: #facc15;
+      margin-right: 6px;
+    }
+
+    .footer-social i {
+      font-size: 1.4rem;
+      margin-left: 18px;
+      color: #b8ccdd;
+      transition: 0.2s;
+    }
+
+    .footer-social i:hover {
+      color: #facc15;
+    }
+
+    .footer-copy {
+      border-top: 1px solid #1e3349;
+      padding-top: 20px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    /* responsive */
+    @media (max-width: 1024px) {
+      .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .featured-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+        padding: 18px 0 10px;
+        background: #0b1a2e;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 0 20px;
+      }
+
+      .featured-main {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 1.4rem;
+      }
+      .hero h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <i class="fas fa-basketball-ball"></i>
+        <span>Sports</span>Space
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="#"><i class="fas fa-home"></i> Home</a>
+        <a href="#"><i class="fas fa-futbol"></i> Football</a>
+        <a href="#"><i class="fas fa-basketball-ball"></i> Basketball</a>
+        <a href="#"><i class="fas fa-baseball-ball"></i> Baseball</a>
+        <a href="#"><i class="fas fa-pen-fancy"></i> Opinion</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- hero / breaking -->
+    <section class="hero">
+      <div class="hero-content">
+        <span class="hero-tag"><i class="fas fa-bolt"></i> BREAKING</span>
+        <h1>Mega trade shakes up the league: star guard moves west</h1>
+        <p>In a blockbuster 5-team deal, the reigning scoring champion heads to the Lakers. Insiders reveal the full details and what it means for the championship race.</p>
+        <div class="hero-meta">
+          <span><i class="fas fa-clock"></i> 2 hours ago</span>
+          <span><i class="fas fa-user-edit"></i> by Marc Stein</span>
+          <span><i class="fas fa-comment"></i> 184 comments</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- latest news grid -->
+    <div class="section-title">
+      <i class="fas fa-newspaper"></i>
+      <span>Latest News</span>
+    </div>
+
+    <div class="grid-3">
+      <article class="news-card">
+        <div class="card-img">
+          <i class="fas fa-futbol fa-4x"></i>
+          <span class="cat-tag">Football</span>
+        </div>
+        <div class="card-body">
+          <h3>Champions League: Underdogs stun favourites in dramatic quarter-final</h3>
+          <p>Late drama at the Bernabéu as the visitors snatch a last-minute winner to keep their European dream alive.</p>
+          <div class="card-footer">
+            <span><i class="fas fa-clock"></i> 4h ago</span>
+            <span class="author"><i class="fas fa-user"></i> Sam Lee</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card">
+        <div class="card-img">
+          <i class="fas fa-basketball-ball fa-4x"></i>
+          <span class="cat-tag">Basketball</span>
+        </div>
+        <div class="card-body">
+          <h3>Rookie sensation drops 40 points in playoff debut</h3>
+          <p>The 19-year-old phenom broke franchise records and silenced critics with an unforgettable performance.</p>
+          <div class="card-footer">
+            <span><i class="fas fa-clock"></i> 6h ago</span>
+            <span class="author"><i class="fas fa-user"></i> Shams C.</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card">
+        <div class="card-img">
+          <i class="fas fa-baseball-ball fa-4x"></i>
+          <span class="cat-tag">Baseball</span>
+        </div>
+        <div class="card-body">
+          <h3>No-hitter bid ends in 9th, but pitcher still makes history</h3>
+          <p>The young ace struck out 14 and carried a no-hitter into the final inning, falling just short but cementing his legacy.</p>
+          <div class="card-footer">
+            <span><i class="fas fa-clock"></i> 9h ago</span>
+            <span class="author"><i class="fas fa-user"></i> Jeff P.</span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- featured + sidebar -->
+    <div class="featured-grid">
+      <section class="featured-main">
+        <h2><i class="fas fa-star"></i> Editor's Picks</h2>
+        <div class="big-news">
+          <div class="big-news-item">
+            <h4>Inside the quarterback controversy: Who will start Week 1?</h4>
+            <p>With training camp heating up, coaches remain tight-lipped. Our insiders break down the battle.</p>
+            <div class="meta"><i class="fas fa-user"></i> Adam Schefter · 3h ago</div>
+          </div>
+          <div class="big-news-item">
+            <h4>WNBA finals: Liberty vs. Aces — a clash of dynasties</h4>
+            <p>Two of the league's most dominant teams collide in what could be a defining series for women's basketball.</p>
+            <div class="meta"><i class="fas fa-user"></i> Ramona Shelburne · 6h ago</div>
+          </div>
+          <div class="big-news-item">
+            <h4>Formula 1: New regulation changes set to shake up grid</h4>
+            <p>From engine rules to aero packages, the 2026 season promises the biggest technical shift in a decade.</p>
+            <div class="meta"><i class="fas fa-user"></i> Lawrence Barretto · 12h ago</div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <h3><i class="fas fa-fire"></i> Trending</h3>
+          <ul class="sidebar-list">
+            <li><span class="num">1</span> Trade deadline winners & losers</li>
+            <li><span class="num">2</span> MVP race: who's leading?</li>
+            <li><span class="num">3</span> College football transfer portal</li>
+            <li><span class="num">4</span> Tennis: Alcaraz vs. Sinner</li>
+            <li><span class="num">5</span> Olympic qualifier results</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h3><i class="fas fa-calendar-alt"></i> Upcoming</h3>
+          <ul class="sidebar-list">
+            <li><i class="fas fa-futbol" style="color:#facc15; width:20px;"></i> UCL Final · May 30</li>
+            <li><i class="fas fa-basketball-ball" style="color:#facc15; width:20px;"></i> NBA Finals · June 4</li>
+            <li><i class="fas fa-baseball-ball" style="color:#facc15; width:20px;"></i> MLB All-Star · July 15</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <!-- more news (grid 2) -->
+    <div class="section-title" style="margin-top: 10px;">
+      <i class="fas fa-flag-checkered"></i>
+      <span>More Sports</span>
+    </div>
+    <div class="grid-3">
+      <article class="news-card">
+        <div class="card-img"><i class="fas fa-hockey-puck fa-4x"></i><span class="cat-tag">Hockey</span></div>
+        <div class="card-body">
+          <h3>Overtime thriller: Game 7 delivers instant classic</h3>
+          <p>Double overtime, controversial calls, and a goal that will be talked about for decades.</p>
+          <div class="card-footer"><span><i class="fas fa-clock"></i> 2h ago</span><span class="author"><i class="fas fa-user"></i> Emily K.</span></div>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="card-img"><i class="fas fa-running fa-4x"></i><span class="cat-tag">Athletics</span></div>
+        <div class="card-body">
+          <h3>World record falls in 100m: new era of speed?</h3>
+          <p>The 22-year-old sprinter shaved 0.05 seconds off the previous mark, leaving experts stunned.</p>
+          <div class="card-footer"><span><i class="fas fa-clock"></i> 5h ago</span><span class="author"><i class="fas fa-user"></i> Justin G.</span></div>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="card-img"><i class="fas fa-golf-ball fa-4x"></i><span class="cat-tag">Golf</span></div>
+        <div class="card-body">
+          <h3>Major champion returns from injury with a win</h3>
+          <p>After 18 months away, the former world No. 1 proves he's still got the magic on the greens.</p>
+          <div class="card-footer"><span><i class="fas fa-clock"></i> 8h ago</span><span class="author"><i class="fas fa-user"></i> Mark S.</span></div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-logo">
+          <i class="fas fa-basketball-ball"></i> SportsSpace
+        </div>
+        <div class="footer-social">
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-youtube"></i>
+          <i class="fab fa-tiktok"></i>
+        </div>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 Sports Space. All rights reserved. — Built for journalists, by journalists.
+      </div>
+    </div>
+  </footer>
+
+  <!-- tiny hamburger toggle -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+      hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('open');
+      });
+    });
+
+  // Fetch and display articles from Decap CMS
+  async function loadArticles() {
+    try {
+      const response = await fetch('/articles/');
+      const files = await response.text();
+      // Parse markdown files and display them
+      // (For full integration, use a static site generator like Eleventy or Hugo)
+      console.log('Articles loaded successfully!');
+    } catch (error) {
+      console.log('CMS not yet connected — using static content');
+    }
+  }
+  loadArticles();
+</script>
+</body>
+</html>
